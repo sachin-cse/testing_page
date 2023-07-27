@@ -30,15 +30,15 @@ if(isset($_POST['save_data'])){
     } else {
         $allowedext = array('jpg', 'jpeg', 'png');
         $fileExtension = strtolower(pathinfo($image['name'], PATHINFO_EXTENSION));
-
-        if(!$allowedext($allowedext, $fileExtension)){
+        if(!in_array($fileExtension, $allowedext)){
             $errors[] = 'Invalid image format. Allowed formats are JPG, JPEG, PNG';
         }
     }
+    
 
     if(!empty($errors)){
         foreach($errors as $error){
-            echo 'Error: ' . $error;
+            echo 'Error: ' . $error. "<br>";
         }
     }
     else {
@@ -68,4 +68,5 @@ if(isset($_POST['save_data'])){
    
 
 }
+mysqli_close($conn);
 ?>
