@@ -21,8 +21,8 @@ if(isset($_POST['save_data'])){
 
     if(empty($mobile)){
         $errors[] = 'number must not be empty';
-    } elseif(!preg_match('/^[0-9]{11}+$/', $mobile)){
-        $errors[] = 'mobile number must be 12 digit';
+    } elseif(!preg_match('/^[0-9]{10,12}+$/', $mobile)){
+        $errors[] = 'invalid mobile number';
     }
 
     if(empty($image['name'])){
@@ -45,7 +45,7 @@ if(isset($_POST['save_data'])){
         $filename = $image['name'];
         $filepath = $image['tmp_name'];
 
-    $destfile = 'upload/' . $filename;
+    $destfile = 'upload/' .time(). $filename;
 
     if(move_uploaded_file($filepath, $destfile)){
         
