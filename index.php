@@ -11,9 +11,11 @@
         </style>
 </head>
 <body>
-<label for="gsearch">Search Here:</label>
-<input type="search" id="gsearch" name="gsearch">
-<input type="submit">
+<form action="" method="GET">
+  <label for="gsearch">Search Here:</label>
+  <input type="search" id="search" name="search">
+  <input type="submit">
+</form>
 <br>
 <br>
 <table>
@@ -27,9 +29,21 @@
   </tr>
 <?php
   include 'connection.php';
-  $sql = "Select * From collect";
-  $result = mysqli_query($conn, $sql);
+  $message='';
+  // $sql = "Select * From collect";
+  if(isset($_GET['search'])){
+    $search = $_GET['search'];
+    $sql = "SELECT * FROM collect WHERE name LIKE '%$search%'";
+  } else {
+    $sql = "SELECT * FROM collect";
+    // echo "Data not found";
+  }
 
+
+
+  // $sql = "Select * FROM collect";
+  $result = mysqli_query($conn, $sql);
+  if(mysqli_num_rows($result)>0){
 
   while($row = mysqli_fetch_assoc($result)){
     ?>
@@ -45,6 +59,18 @@
 
 <?php
   }
+
+} elseif(isset($_GET['search']) && mysqli_num_rows($result)==0) {
+  echo "Data not found";
+} else {
+  echo "empty table";
+}
+?>
+<?php
+// if(isset($_GET['search']) && mysqli_num_rows($result)==0){
+//   $message = 'Data not found';
+// }
+// echo $message;
 ?>
 </table>
 </body>
