@@ -53,7 +53,7 @@
     <td><?php echo $row['email']; ?></td>
     <td><?php echo $row['mobile']; ?></td>
     <td><?php echo $row['gender']; ?></td>
-    <td><img src="<?php echo $row['image']; ?>" width="100" height="50"></td>
+    <td><img src="<?php echo $row['image']; ?>" width="100" height="100"></td>
   </tr>
 
 
@@ -65,12 +65,6 @@
 } else {
   echo "empty table";
 }
-?>
-<?php
-// if(isset($_GET['search']) && mysqli_num_rows($result)==0){
-//   $message = 'Data not found';
-// }
-// echo $message;
 ?>
 </table>
 </body>
